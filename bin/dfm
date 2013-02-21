@@ -1,16 +1,17 @@
 #!/bin/sh
 
 ## Ignored files
-IGNORED=".git README.md"
+IGNORED=".git .gitignore README.md"
 
 ## Determine paths
 SELF=`basename $0`
 BIN=`dirname $0`
-DOTFILES=`cd $BIN/..; pwd`
+REALBIN=`cd $BIN; pwd -P`
+DOTFILES=`cd $REALBIN/..; pwd -P`
 
 ## Print usage and exit
 function usage {
-    echo "Usage: $SELF [--install]"
+    echo "Usage: $SELF [--verbose|-v] [--install|-i]"
     exit 1
 }
 
@@ -24,8 +25,15 @@ function create_symlinks {
 	src="$DOTFILES/$entry"
 	tgt="$HOME/$entry"
 
-	if [ -e $tgt ]; then
-	    echo "Destination $tgt already exists, skipping..."
+	if [[ -e $tgt ]]; then
+	    if [[ `readlink $tgt` == "$src" ]]; then
+		if [[ -n $VERBOSE ]]; then
+		    echo "$tgt already installed, skipping..."
+		fi
+	    else
+		echo "$tgt already exists, skipping..."
+	    fi
+
 	    continue
 	fi
 
@@ -39,6 +47,9 @@ for param in $*; do
 	--install|-i)
 	    INSTALL=yes
 	    ;;
+	--verbose|-v)
+	    VERBOSE=yes
+	    ;;
 	*)
 	    usage
 	    ;;
@@ -47,6 +58,10 @@ done
 
 ## Execute
 if [ -n "$INSTALL" ]; then
-    echo "==> Installing dotfiles from '$DOTFILES'"
+    if [[ -n $VERBOSE ]]; then
+	echo "==> Installing dotfiles from '$DOTFILES'"
+    fi
     create_symlinks
+else
+    usage
 fi
