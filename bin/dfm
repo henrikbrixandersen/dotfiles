@@ -17,7 +17,7 @@ usage() {
 
 ## Create symlinks for dotfiles and dirs
 create_symlinks() {
-    for entry in `ls -A $DOTFILES`; do
+    for entry in `ls -A $DOTFILES | grep -v \~`; do
 	if echo $IGNORED | tr ' ' '\n' | fgrep -wq $entry; then
 	    continue
 	fi
