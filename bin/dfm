@@ -1,0 +1,52 @@
+#!/bin/sh
+
+## Ignored files
+IGNORED=".git README.md"
+
+## Determine paths
+SELF=`basename $0`
+BIN=`dirname $0`
+DOTFILES=`cd $BIN/..; pwd`
+
+## Print usage and exit
+function usage {
+    echo "Usage: $SELF [--install]"
+    exit 1
+}
+
+## Create symlinks for dotfiles and dirs
+function create_symlinks {
+    for entry in `ls -A $DOTFILES`; do
+	if echo $IGNORED | tr ' ' '\n' | fgrep -wq $entry; then
+	    continue
+	fi
+
+	src="$DOTFILES/$entry"
+	tgt="$HOME/$entry"
+
+	if [ -e $tgt ]; then
+	    echo "Destination $tgt already exists, skipping..."
+	    continue
+	fi
+
+	ln -sv $src $tgt
+    done
+}
+
+## Parse parameters
+for param in $*; do
+    case $param in
+	--install|-i)
+	    INSTALL=yes
+	    ;;
+	*)
+	    usage
+	    ;;
+    esac
+done
+
+## Execute
+if [ -n "$INSTALL" ]; then
+    echo "==> Installing dotfiles from '$DOTFILES'"
+    create_symlinks
+fi

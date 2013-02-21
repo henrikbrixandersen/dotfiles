@@ -1,0 +1,11 @@
+#compdef rmbak
+#
+# Written by Henrik Brix Andersen <henrik@brixandersen.dk>
+
+_arguments \
+    '(- *)-h[output usage and exit]' \
+    '-r[recurse into subdirectories]'
+
+# Local Variables: ***
+# mode:sh ***
+# End: ***

@@ -1,0 +1,37 @@
+# -*- mode: sh; -*-
+#
+# ZSH function to remove emacs backup files (*~ and .*~) in current
+# directory. Recursive mode is enabled with the -r option.
+#
+# Requires 'setopt LOCAL_OPTIONS'.
+#
+# Written by Henrik Brix Andersen <henrik@brixandersen.dk>
+
+unsetopt NOMATCH
+setopt GLOB_DOTS
+
+local recursive=0
+
+while (( $# )); do
+    case "$1" in
+	(-r)
+	    shift
+	    recursive=1
+	    ;;
+	(-h)
+	    shift
+	    echo "Usage: $0 [-r -h]"
+	    return
+	    ;;
+	(*)
+	    echo "Unknown option: $1"
+	    return
+	    ;;
+    esac
+done
+
+if (( $recursive )); then
+    rm -vf **/*~
+else
+    rm -vf *~
+fi

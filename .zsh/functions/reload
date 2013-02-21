@@ -1,0 +1,7 @@
+# -*- mode: sh; -*-
+
+local f
+f=(~/.zsh/functions/*[^~](.))
+
+unfunction $f:t
+autoload -U $f:t

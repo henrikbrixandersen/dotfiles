@@ -1,0 +1,10 @@
+#compdef port
+#
+# Written by Henrik Brix Andersen <henrik@brixandersen.dk>
+
+_arguments \
+    '*:service name or port number:_ports'
+
+# Local Variables: ***
+# mode:sh ***
+# End: ***

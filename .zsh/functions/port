@@ -1,0 +1,17 @@
+# -*- mode: sh; -*-
+#
+# ZSH function to simplify listing applications using a given TCP/UDP
+# port.
+#
+# Written by Henrik Brix Andersen <henrik@brixandersen.dk>
+# Inspired by https://twitter.com/leanvienna/status/215414340478705665
+
+if [[ $# -gt 1 ]]; then
+    echo "Usage: $0 [service name|port number]"
+    return 1
+elif [[ $# -eq 1 ]]; then
+    lsof -i :$1
+else
+    lsof -i
+fi
+

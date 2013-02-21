@@ -1,0 +1,62 @@
+[miscellany]
+enable-auto-props = no
+
+[auto-props]
+## FreeBSD src
+*.c     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.h     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.s     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.S     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.cc    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.cpp   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.cxx   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.in    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.sh    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain; svn:executable
+*.pl    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain; svn:executable
+*.pm    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.py    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.rb    = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.awk   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.sed   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.txt   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.conf  = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+Makefile* = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.1     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.2     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.3     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.4     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.5     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.6     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.7     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.8     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+*.9     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+
+*.css   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/css
+*.html  = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/html
+*.xhtml = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/html+xml
+*.xml   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/xml
+*.xsd   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/xml
+*.xsl   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/xml
+*.xslt  = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/xml
+*.xul   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/xul
+*.sgml   = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/sgml
+*.docbook = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/sgml
+
+*.pdf   = svn:mime-type=application/pdf
+*.ps    = svn:mime-type=application/postscript
+*.eps   = svn:mime-type=application/postscript
+*.exe   = svn:mime-type=application/octet-stream
+*.bin   = svn:mime-type=application/octet-stream
+
+*.jpg   = svn:mime-type=image/jpeg
+*.jpeg  = svn:mime-type=image/jpeg
+*.gif   = svn:mime-type=image/gif
+*.png   = svn:mime-type=image/png
+*.tiff  = svn:mime-type=image/tiff
+
+## FreeBSD Ports
+bsd.*.mk     = svn:eol-style=native; svn:keywords=FreeBSD=%H; svn:mime-type=text/plain
+distinfo     = svn:eol-style=native; fbsd:nokeywords=yes; svn:mime-type=text/plain
+extrapatch-* = svn:eol-style=native; fbsd:nokeywords=yes; svn:mime-type=text/plain
+patch-*      = svn:eol-style=native; fbsd:nokeywords=yes; svn:mime-type=text/plain
+pkg-*        = svn:eol-style=native; fbsd:nokeywords=yes; svn:mime-type=text/plain

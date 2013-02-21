@@ -1,0 +1,7 @@
+vbell off
+startup_message off
+term screen-256color
+attrcolor b ".I"
+termcapinfo xterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
+defhstatus "$USER@^EH:screen:^Et"
+hardstatus off
