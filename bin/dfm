@@ -11,7 +11,7 @@ DOTFILES=`cd $REALBIN/..; pwd -P`
 
 ## Print usage and exit
 function usage {
-    echo "Usage: $SELF [--verbose|-v] [--install|-i]"
+    echo "Usage: $SELF [--verbose|-v] [--install|-i] [--dry-run]"
     exit 1
 }
 
@@ -37,13 +37,20 @@ function create_symlinks {
 	    continue
 	fi
 
-	ln -sv $src $tgt
+	if [[ -n $DRYRUN ]]; then
+	    echo "ln -sv $src $tgt"
+	else
+	    ln -sv $src $tgt
+	fi
     done
 }
 
 ## Parse parameters
 for param in $*; do
     case $param in
+	--dry-run)
+	    DRYRUN=yes
+	    ;;
 	--install|-i)
 	    INSTALL=yes
 	    ;;
