@@ -27,7 +27,7 @@ create_symlinks() {
 
 	if [ -e $tgt ] || [ -L $tgt ]; then
 	    if [ "`readlink $tgt`" = "$src" ]; then
-		if [ -n $VERBOSE ]; then
+		if [ -n "$VERBOSE" ]; then
 		    echo "$tgt already installed, skipping..."
 		fi
 	    else
@@ -37,7 +37,7 @@ create_symlinks() {
 	    continue
 	fi
 
-	if [ -n $DRYRUN ]; then
+	if [ -n "$DRYRUN" ]; then
 	    echo "ln -sv $src $tgt"
 	else
 	    ln -sv $src $tgt
@@ -65,7 +65,7 @@ done
 
 ## Execute
 if [ -n "$INSTALL" ]; then
-    if [ -n $VERBOSE ]; then
+    if [ -n "$VERBOSE" ]; then
 	echo "==> Installing dotfiles from '$DOTFILES'"
     fi
     create_symlinks
