@@ -25,7 +25,7 @@ create_symlinks() {
 	src="$DOTFILES/$entry"
 	tgt="$HOME/$entry"
 
-	if [ -e $tgt ]; then
+	if [ -e $tgt ] || [ -L $tgt ]; then
 	    if [ "`readlink $tgt`" = "$src" ]; then
 		if [ -n $VERBOSE ]; then
 		    echo "$tgt already installed, skipping..."
