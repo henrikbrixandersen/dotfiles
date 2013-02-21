@@ -1,0 +1,8 @@
+cvs -z3
+update -dP
+up -dP
+diff -up
+rdiff -up
+checkout -P
+co -P
+get -P
