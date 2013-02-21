@@ -10,13 +10,13 @@ REALBIN=`cd $BIN; pwd -P`
 DOTFILES=`cd $REALBIN/..; pwd -P`
 
 ## Print usage and exit
-function usage {
+usage() {
     echo "Usage: $SELF [--verbose|-v] [--install|-i] [--dry-run]"
     exit 1
 }
 
 ## Create symlinks for dotfiles and dirs
-function create_symlinks {
+create_symlinks() {
     for entry in `ls -A $DOTFILES`; do
 	if echo $IGNORED | tr ' ' '\n' | fgrep -wq $entry; then
 	    continue
