@@ -88,7 +88,7 @@ zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(
 zstyle ':completion:*:*:kill:*' menu selection
 zstyle ':completion:*:*:*:users' ignored-patterns '_*' toor cyrus \
     daemon operator bin tty kmem games news man sshd smmsp mailnull \
-    bind proxy uucp pop nobody bitlbee mysql postfix www
+    bind proxy uucp pop nobody bitlbee mysql postfix www git_daemon
 zstyle ':completion:*:*:*:hosts' ignored-patterns broadcasthost
 zstyle ':completion:*:*:*:functions' ignored-patterns '_*'
 
