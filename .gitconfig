@@ -3,3 +3,5 @@
 [user]
 	name = Henrik Brix Andersen
 	email = henrik@brixandersen.dk
+[push]
+	default = simple
