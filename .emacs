@@ -189,6 +189,6 @@
      ;; default
      (set-face-foreground 'default "White")
      (set-face-background 'default "gray33")
-     (set-face-font 'default "-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*")
+     ;(set-face-font 'default "-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*")
      )
 )
