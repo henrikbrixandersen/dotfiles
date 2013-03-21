@@ -155,6 +155,9 @@
 ;; set up X11 specific stuff
 (if (string-equal window-system "x")
     (progn
+      ;; Make dead keys work
+      (require 'iso-transl)
+
       ;; set the title
       (setq frame-title-format
 	    (concat  "%f " invocation-name "@" system-name))
