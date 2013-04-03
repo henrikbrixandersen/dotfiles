@@ -1,0 +1,65 @@
+## aliases
+alias ll	'ls -lA'
+alias rmbak	'rm -vf *~ .*~'
+
+## umask
+umask 22
+
+## environment
+setenv PATH		$HOME/bin:$PATH
+setenv BLOCKSIZE	K
+unsetenv CLICOLOR
+setenv EDITOR		emacs
+setenv LC_ALL		en_US.UTF-8
+setenv LESS		'-C -i -M'
+setenv PAGER		less
+
+## interactive shell
+if ($?prompt) then
+    if ($uid == 0) then
+	set prompt = '%m%# '
+    else
+	set prompt = '[%n@%m %~]%# '
+    endif
+
+    if ( "`echotc meta`" == "yes" ) then
+	stty pass8
+    endif
+
+    set complete = enhance
+    set echo_style = both
+    set history = 1000
+    set promptchars = '$#'
+    set rmstar
+    set savehist = 1000 merge
+
+    bindkey -e # emacs keybindings
+    bindkey "^W" backward-delete-word
+    #bindkey -k up history-search-backward
+    #bindkey -k down history-search-forward
+
+    if ( -f ~/.ssh/config ) then
+	set hostlist=`grep ^Host ~/.ssh/config | sed -e "s/^Host //"`
+	complete ssh 'p/1/$hostlist/' 'p/2/c/'
+    endif
+
+    complete man 'p/1/c/'
+    complete which 'p/1/c/'
+    complete sudo 'p/1/c/'
+
+    if ($TERM == 'xterm' || $TERM == 'xterm-color' || $TERM == 'xterm-256color' || $TERM == 'screen') then
+	set shortname=`hostname -s`
+
+	if ($TERM == 'screen') then
+	    set prefix='screen:'
+	else
+	    set prefix=''
+	endif
+
+	alias cwdcmd	'echo -n "\033]0;${USER}@${shortname}:${prefix}\!#\007"'
+	alias jobcmd	'echo -n "\033]0;${USER}@${shortname}:${prefix}\!#\007"'
+	alias precmd	'cwdcmd'
+    endif
+
+    set printexitvalue
+endif
