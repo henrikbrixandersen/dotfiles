@@ -38,8 +38,8 @@
 (setq ispell-dictionary "dansk")
 
 ;; indent should insert tabs
-(setq indent-tabs-mode t)
-(setq tab-width 4)
+(setq indent-tabs-mode nil)
+;(setq tab-width 4)
 
 ;; turn on font-lock
 (setq font-lock-maximum-decoration t)
@@ -110,14 +110,14 @@
 	      (setq indent-tabs-mode t)
 	      ;; Use C-c C-s at points of source code so see which
 	      ;; c-set-offset is in effect for this situation
-	      (c-set-offset 'defun-block-intro 8)
-	      (c-set-offset 'statement-block-intro 8)
-	      (c-set-offset 'statement-case-intro 8)
-	      (c-set-offset 'substatement-open 4)
-	      (c-set-offset 'substatement 8)
+	      (c-set-offset 'defun-block-intro 4)
+	      (c-set-offset 'statement-block-intro 4)
+	      (c-set-offset 'statement-case-intro 4)
+	      (c-set-offset 'substatement-open 2)
+	      (c-set-offset 'substatement 4)
 	      (c-set-offset 'arglist-cont-nonempty 4)
-	      (c-set-offset 'inclass 8)
-	      (c-set-offset 'knr-argdecl-intro 8)))
+	      (c-set-offset 'inclass 4)
+	      (c-set-offset 'knr-argdecl-intro 4)))
 
 (add-hook 'perl-mode-hook
 	  (lambda ()
