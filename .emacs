@@ -107,7 +107,7 @@
 (add-hook 'c-mode-hook
 	  (lambda ()
 	      (c-set-style "bsd")
-	      (setq indent-tabs-mode t)
+	      (setq indent-tabs-mode nil)
 	      ;; Use C-c C-s at points of source code so see which
 	      ;; c-set-offset is in effect for this situation
 	      (c-set-offset 'defun-block-intro 4)
