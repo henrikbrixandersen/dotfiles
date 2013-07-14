@@ -47,6 +47,12 @@ if [[ -d ~/perl5/lib ]]; then
     path=($HOME/perl5/bin $path)
 fi
 
+## Local rubygem
+if [[ -d $HOME/rubygems ]]; then
+    export GEM_HOME=$HOME/rubygems
+    path=($GEM_HOME/bin $path)
+fi
+
 ## Development perl5lib
 if [[ -d ~/Projects/svn.brixandersen.dk/perl5lib ]]; then
     export PERL5LIB=$HOME/Projects/svn.brixandersen.dk/perl5lib:$PERL5LIB
