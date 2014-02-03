@@ -6,6 +6,15 @@
 ;; scad
 (require 'scad nil t)
 
+;; Graphviz dot mode
+(require 'graphviz-dot-mode)
+(add-to-list 'auto-mode-alist '("\\.uml\\'" . graphviz-dot-mode))
+(setq graphviz-dot-preview-extension "svg")
+(setq graphviz-dot-view-command "open %s")
+(setq graphviz-dot-auto-indent-on-braces nil)
+(setq graphviz-dot-auto-indent-on-semi nil)
+(setq graphviz-dot-auto-indent-on-newline nil)
+
 ;; tramp
 ;(require 'tramp)
 ;(setq tramp-default-method "scpx")
@@ -119,11 +128,23 @@
 	      (c-set-offset 'inclass 4)
 	      (c-set-offset 'knr-argdecl-intro 4)))
 
-(add-hook 'perl-mode-hook
+(defalias 'perl-mode 'cperl-mode)
+(add-hook 'cperl-mode-hook
 	  (lambda ()
-	    (setq indent-tabs-mode nil)
-	    (setq tab-width 4)
-	    (setq perl-indent-level 4)))
+	    (setq cperl-indent-level 4
+		  cperl-close-paren-offset -4
+		  cperl-continued-statement-offset 4
+		  cperl-indent-parens-as-block t
+		  cperl-tab-always-indent t
+		  cperl-invalid-face nil)))
+(custom-set-faces '(cperl-array-face ((t (:foreground "green" :weight bold))))
+		  '(cperl-hash-face ((t (:foreground "red" :weight bold)))))
+
+;(add-hook 'perl-mode-hook
+;	  (lambda ()
+;	    (setq indent-tabs-mode nil)
+;	    (setq tab-width 4)
+;	    (setq perl-indent-level 4)))
 
 (add-hook 'sgml-mode-hook
 	  (lambda ()
