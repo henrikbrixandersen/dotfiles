@@ -1,13 +1,11 @@
 ;; set the load path
-(let ((default-directory "~/.emacs.d/lisp/"))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp/") load-path))
 
 ;; scad
 (require 'scad nil t)
 
 ;; Graphviz dot mode
-(require 'graphviz-dot-mode)
+(require 'graphviz-dot-mode nil t)
 (add-to-list 'auto-mode-alist '("\\.uml\\'" . graphviz-dot-mode))
 (setq graphviz-dot-preview-extension "svg")
 (setq graphviz-dot-view-command "open %s")
