@@ -16,6 +16,12 @@ fi
 export LC_ALL=en_US.UTF-8
 export TZ=Europe/Copenhagen
 
+# Xilinx ISE
+XILINX=`ls -d /opt/Xilinx/* | sort -n | tail -n 1`
+if [[ -n "$XILINX" ]]; then
+   path=($XILINX/ISE_DS/ISE/bin/lin64 $path)
+fi
+
 ## NXJ
 if [[ -d ~/nxj/bin ]]; then
     export NXJ_HOME=~/nxj
