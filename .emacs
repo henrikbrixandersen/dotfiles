@@ -138,6 +138,50 @@
 (custom-set-faces '(cperl-array-face ((t (:foreground "green" :weight bold))))
 		  '(cperl-hash-face ((t (:foreground "red" :weight bold)))))
 
+(add-hook 'vhdl-mode-hook
+	  (lambda ()
+	    (setq vhdl-actual-port-name (quote (".*" . "\\&_i"))
+		  vhdl-clock-edge-condition (quote function)
+		  vhdl-clock-name "clk"
+		  vhdl-compiler-options "-93"
+		  vhdl-conditions-in-parenthesis t
+		  vhdl-electric-mode t
+		  vhdl-entity-file-name (quote (".*" . "\\&_entity"))
+		  vhdl-reset-active-high t
+		  vhdl-reset-name "reset"
+		  vhdl-self-insert-comments nil
+		  vhdl-standard (quote (93 nil))
+		  vhdl-upper-case-keywords t
+		  vhdl-file-header "-- Copyright (c) <year> <author>
+-- All rights reserved.
+--
+-- Redistribution and use in source and binary forms, with or without
+-- modification, are permitted provided that the following conditions
+-- are met:
+-- 1. Redistributions of source code must retain the above copyright
+--    notice, this list of conditions and the following disclaimer.
+-- 2. Redistributions in binary form must reproduce the above copyright
+--    notice, this list of conditions and the following disclaimer in the
+--    documentation and/or other materials provided with the distribution.
+--
+-- THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+-- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+-- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+-- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+-- OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+-- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+-- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+-- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+-- SUCH DAMAGE.
+--
+
+LIBRARY ieee;
+use IEEE.std_logic_1164.all;
+
+<cursor>")))
+
 ;(add-hook 'perl-mode-hook
 ;	  (lambda ()
 ;	    (setq indent-tabs-mode nil)
