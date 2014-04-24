@@ -18,9 +18,10 @@ export TZ=Europe/Copenhagen
 
 # Xilinx ISE
 if [[ -d /opt/Xilinx ]]; then
-    XILINX=`ls -d /opt/Xilinx/* | sort -n | tail -n 1`
-    if [[ -n "$XILINX" ]]; then
-	path=($XILINX/ISE_DS/ISE/bin/lin64 $path)
+    latest=`ls -d /opt/Xilinx/* | sort -n | tail -n 1`
+    if [[ -n "$latest" ]]; then
+	export XILINX=$latest/ISE_DS/ISE
+	path=($XILINX/bin/lin64 $path)
     fi
 fi
 
