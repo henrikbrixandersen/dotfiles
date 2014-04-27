@@ -138,6 +138,9 @@
 (custom-set-faces '(cperl-array-face ((t (:foreground "green" :weight bold))))
 		  '(cperl-hash-face ((t (:foreground "red" :weight bold)))))
 
+(autoload 'ucf-mode "ucf-mode" "Xilinx UCF mode" t)
+(add-to-list 'auto-mode-alist '("\\.ucf\\'" . ucf-mode))
+
 (add-hook 'vhdl-mode-hook
 	  (lambda ()
 	    (setq vhdl-actual-port-name (quote (".*" . "\\&_i"))
