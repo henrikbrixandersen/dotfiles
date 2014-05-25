@@ -19,6 +19,7 @@ export GREP_COLOR='36;1'
 ## Aliases
 alias ll='ls -lA'
 alias h='history'
+alias ec='emacsclient'
 alias perllocalupgrade="perldoc -t perllocal | grep Module | sed -e 's/^.* \"Module\" //' -e 's/-/::/g' | sort | uniq | xargs cpan -i"
 
 ## Named directories
