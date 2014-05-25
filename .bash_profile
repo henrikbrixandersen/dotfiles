@@ -6,6 +6,7 @@ fi
 # Aliases
 alias ll='ls -lA'
 alias rmbak='rm -vf *~ .*~'
+alias ec=emacsclient
 
 # Colors
 export CLICOLOR=1
