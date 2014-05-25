@@ -79,6 +79,22 @@
 ;; key binding for going to a specific line
 (global-set-key [(meta g)] 'goto-line)
 
+;; Keyboard macros
+(defun my-macro-query (arg)
+  "Prompt for input using minibuffer during kbd macro execution.
+   With prefix argument, allows you to select what prompt string to use.
+   If the input is non-empty, it is inserted at point."
+  (interactive "P")
+  (let* ((prompt (if arg (read-from-minibuffer "PROMPT: ") "Input: "))
+	 (input (minibuffer-with-setup-hook (lambda () (kbd-macro-query t))
+		  (read-from-minibuffer prompt))))
+    (unless (string= "" input) (insert input))))
+(global-set-key "\C-xQ" 'my-macro-query)
+
+(fset 'sfrx
+   "/* \C-u\C-xQDescription: \C-m\C-m /*\C-?\C-?*/\C-mSFRX(\C-u\C-xQName: \C-m\C-m, \C-u\C-xQAddress: \C-m\C-m);\C-m#define  (1<<0)\C-m#define  (1<<1)\C-m#define  (1<<2)\C-m#define  (1<<3)\C-m#define  (1<<4)\C-m#define  (1<<5)\C-m#define  (1<<6)\C-m#define  (1<<7)\C-m")
+
+
 ;; load auctex
 (if (load "auctex.el" t nil t)
     (progn
@@ -217,6 +233,9 @@ use IEEE.std_logic_1164.all;
 (setq magic-mode-alist
       (cons '("<\\?xml " . xml-mode)
 	    magic-mode-alist))
+
+;; use asm-mode for 8051 assembly files
+(add-to-list 'auto-mode-alist '("\\.a51\\'" . asm-mode))
 
 ;; set up X11 specific stuff
 (if (string-equal window-system "x")
