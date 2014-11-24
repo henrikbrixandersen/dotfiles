@@ -13,7 +13,11 @@ if [[ -d ~/Projects/github/Slic3r/utils/zsh/functions ]]; then
 fi
 
 ## Global environment
-export LC_ALL=en_US.UTF-8
+if locale -a | grep -q en_US.utf8; then
+    export LC_ALL=en_US.utf8
+else
+    export LC_ALL=en_US.UTF-8
+fi
 export TZ=Europe/Copenhagen
 
 # Xilinx ISE
