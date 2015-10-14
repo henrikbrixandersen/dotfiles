@@ -29,9 +29,15 @@ if [[ -d /opt/Xilinx ]]; then
     fi
 fi
 
+
 ## SDCC
 if [[ -d /usr/local/sdcc/bin ]]; then
     path=(/usr/local/sdcc/bin $path)
+fi
+
+## Gnu Make
+if [[ -d /opt/make/bin ]]; then
+    path=(/opt/make/bin $path)
 fi
 
 ## NXJ
