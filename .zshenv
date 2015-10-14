@@ -29,6 +29,11 @@ if [[ -d /opt/Xilinx ]]; then
     fi
 fi
 
+## SDCC
+if [[ -d /usr/local/sdcc/bin ]]; then
+    path=(/usr/local/sdcc/bin $path)
+fi
+
 ## NXJ
 if [[ -d ~/nxj/bin ]]; then
     export NXJ_HOME=~/nxj
