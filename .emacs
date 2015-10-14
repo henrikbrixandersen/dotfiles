@@ -14,8 +14,8 @@
 (setq graphviz-dot-auto-indent-on-newline nil)
 
 ;; tramp
-;(require 'tramp)
-;(setq tramp-default-method "scpx")
+(require 'tramp)
+(setq tramp-default-method "ssh")
 
 ;; e-mail
 (setq user-mail-address "henrik@brixandersen.dk")
