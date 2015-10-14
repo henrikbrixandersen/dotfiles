@@ -5,3 +5,7 @@
 	email = henrik@brixandersen.dk
 [push]
 	default = simple
+[branch]
+	autosetuprebase = always
+[log]
+	date = iso
