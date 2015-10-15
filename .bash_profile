@@ -5,12 +5,14 @@ fi
 
 # Aliases
 alias ll='ls -lA'
-alias ec=emacsclient
+alias rmbak='rm -vf *~ .*~'
+alias ec='emacsclient'
 
-# Functions
-function rmbak() {
-    rm -vf *~ .*~
-}
+
+# Shell options
+if shopt | grep -q direxpand; then
+    shopt -s direxpand
+fi
 
 # Colors
 export CLICOLOR=1
@@ -29,3 +31,13 @@ case $TERM in
 	unset PROMPT_COMMAND
         ;;
 esac
+
+remove-ssh-hostkey() {
+    sed -i -e "/^$1,/d" -e "/^$1[[:space:]]/d" $HOME/.ssh/known_hosts
+}
+
+_remove-ssh-hostkey() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "`cut -d ',' -f 1 $HOME/.ssh/known_hosts | cut -d ' ' -f 1`" -- $cur))
+}
+complete -F _remove-ssh-hostkey remove-ssh-hostkey
