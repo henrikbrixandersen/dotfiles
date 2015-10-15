@@ -1,11 +1,15 @@
-[color]
-	ui = auto
 [user]
 	name = Henrik Brix Andersen
 	email = henrik@brixandersen.dk
 [push]
-	default = simple
+	default = current
+[color]
+	ui = auto
+[log]
+	date = local
+[rebase]
+	stat = true
 [branch]
 	autosetuprebase = always
-[log]
-	date = iso
+[alias]
+	sta = status
