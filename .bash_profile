@@ -41,3 +41,39 @@ _remove-ssh-hostkey() {
     COMPREPLY=($(compgen -W "`cut -d ',' -f 1 $HOME/.ssh/known_hosts | cut -d ' ' -f 1`" -- $cur))
 }
 complete -F _remove-ssh-hostkey remove-ssh-hostkey
+
+xilinx_ise() {
+    echo "Setting up environment for Xilinx 14.7"
+    _unset_xilinx_env
+    source /opt/Xilinx/14.7/ISE_DS/settings64.sh
+}
+
+xilinx_vivado() {
+    echo "Setting up environment for Xilinx Vivado 2015.3"
+    _unset_xilinx_env
+    source /opt/Xilinx/Vivado/2015.3/settings64.sh
+}
+
+_unset_xilinx_env() {
+    local _var
+    local _path
+    local _NEWPATH
+
+    for _var in `env|grep ^XILINX | cut -d = -f 1`; do
+	unset $_var
+    done
+
+    for _path in `echo $PATH | tr : ' '`; do
+	if ! echo $_path | grep -qi xilinx; then
+	    _NEWPATH=$_NEWPATH:$_path
+	fi
+    done
+    export PATH=`echo $_NEWPATH | sed -e 's/^://'`
+
+    for _path in `echo $LD_LIBRARY_PATH | tr : ' '`; do
+	if ! echo $_path | grep -qi xilinx; then
+	    _NEWPATH=$_NEWPATH:$_path
+	fi
+    done
+    export LD_LIBRARY_PATH=`echo $_NEWPATH | sed -e 's/^://'`
+}
