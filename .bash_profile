@@ -42,17 +42,6 @@ _remove-ssh-hostkey() {
 }
 complete -F _remove-ssh-hostkey remove-ssh-hostkey
 
-xilinx_ise() {
-    echo "Setting up environment for Xilinx 14.7"
-    _unset_xilinx_env
-    source /opt/Xilinx/14.7/ISE_DS/settings64.sh
-}
-
-xilinx_vivado() {
-    echo "Setting up environment for Xilinx Vivado 2015.3"
-    _unset_xilinx_env
-    source /opt/Xilinx/Vivado/2015.3/settings64.sh
-}
 
 _unset_xilinx_env() {
     local _var
@@ -77,3 +66,16 @@ _unset_xilinx_env() {
     done
     export LD_LIBRARY_PATH=`echo $_NEWPATH | sed -e 's/^://'`
 }
+
+xilinx_ise() {
+    echo "Setting up environment for Xilinx 14.7"
+    _unset_xilinx_env
+    source /opt/Xilinx/14.7/ISE_DS/settings64.sh
+}
+
+xilinx_vivado() {
+    echo "Setting up environment for Xilinx Vivado 2015.4"
+    _unset_xilinx_env
+    source /opt/Xilinx/Vivado/2015.4/settings64.sh
+}
+
