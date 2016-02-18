@@ -229,6 +229,9 @@ use IEEE.std_logic_1164.all;
 ;; use sieve-mode for *.sieve files
 (add-to-list 'auto-mode-alist '("\\.sieve\\'" . sieve-mode))
 
+;; use tcl-mode for *.xdc files
+(add-to-list 'auto-mode-alist '("\\.xdc\\'" . tcl-mode))
+
 ;; use xml-mode for all XML files
 (setq magic-mode-alist
       (cons '("<\\?xml " . xml-mode)
