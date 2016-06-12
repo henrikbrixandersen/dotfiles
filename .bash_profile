@@ -68,14 +68,16 @@ _unset_xilinx_env() {
 }
 
 xilinx_ise() {
-    echo "Setting up environment for Xilinx 14.7"
+#    echo "Setting up environment for Xilinx 14.7"
     _unset_xilinx_env
     source /opt/Xilinx/14.7/ISE_DS/settings64.sh
 }
 
 xilinx_vivado() {
-    echo "Setting up environment for Xilinx Vivado 2015.4"
-    _unset_xilinx_env
-    source /opt/Xilinx/Vivado/2015.4/settings64.sh
-}
+    local version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | head -n 1\``
 
+#    echo "Setting up environment for Xilinx Vivado $version"
+    _unset_xilinx_env
+    source /opt/Xilinx/Vivado/$version/settings64.sh
+}
+xilinx_vivado
