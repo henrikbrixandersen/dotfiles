@@ -13,8 +13,7 @@
 (setq graphviz-dot-auto-indent-on-semi nil)
 (setq graphviz-dot-auto-indent-on-newline nil)
 
-;; tramp
-(require 'tramp)
+; Use SSH for tramp-mode
 (setq tramp-default-method "ssh")
 
 ;; e-mail
@@ -24,7 +23,7 @@
 (setq inhibit-startup-message t)
 
 ;; iswitchb-mode is a must
-(iswitchb-mode t)
+(icomplete-mode 99)
 
 ;; automaticall de/compress files
 (auto-compression-mode t)
@@ -38,15 +37,9 @@
 ;; no bell
 ;(setq ring-bell-function (lambda ()))
 
-;; use aspell, not ispell
-(setq ispell-program-name "aspell")
-
-;; use the danish dictionary as default
-(setq ispell-dictionary "dansk")
-
-;; indent should insert tabs
-(setq indent-tabs-mode nil)
-;(setq tab-width 4)
+;; indent should not insert tabs
+(setq-default indent-tabs-mode nil)
+;(setq-default tab-width 4)
 
 ;; turn on font-lock
 (setq font-lock-maximum-decoration t)
@@ -79,86 +72,70 @@
 ;; key binding for going to a specific line
 (global-set-key [(meta g)] 'goto-line)
 
-;; Keyboard macros
-(defun my-macro-query (arg)
-  "Prompt for input using minibuffer during kbd macro execution.
-   With prefix argument, allows you to select what prompt string to use.
-   If the input is non-empty, it is inserted at point."
-  (interactive "P")
-  (let* ((prompt (if arg (read-from-minibuffer "PROMPT: ") "Input: "))
-	 (input (minibuffer-with-setup-hook (lambda () (kbd-macro-query t))
-		  (read-from-minibuffer prompt))))
-    (unless (string= "" input) (insert input))))
-(global-set-key "\C-xQ" 'my-macro-query)
-
-(fset 'sfrx
-   "/* \C-u\C-xQDescription: \C-m\C-m /*\C-?\C-?*/\C-mSFRX(\C-u\C-xQName: \C-m\C-m, \C-u\C-xQAddress: \C-m\C-m);\C-m#define  (1<<0)\C-m#define  (1<<1)\C-m#define  (1<<2)\C-m#define  (1<<3)\C-m#define  (1<<4)\C-m#define  (1<<5)\C-m#define  (1<<6)\C-m#define  (1<<7)\C-m")
-
-
-;; load auctex
-(if (load "auctex.el" t nil t)
-    (progn
-      (setq TeX-auto-save t)
-      (setq TeX-parse-self t)
-
-      (add-hook 'TeX-mode-hook
-		(lambda ()
-		  ;; spellcheck on-the-fly
-		  (flyspell-mode t)
-		  ;; let ispell handle TeX
-		  (setq ispell-parser 'tex)
-		  ;; use reftex
-		  (turn-on-reftex)
-		  (setq reftex-use-multiple-selection-buffers t)
-		  (setq reftex-enable-partial-scans t)
-		  ;; use varioref as default
-		  (setq reftex-vref-is-default t)
-		  (setq reftex-plug-into-AUCTeX t)))
-
-      (add-hook 'LaTeX-mode-hook
-		(lambda ()
-		  ;; default to PDF mode
-		  (TeX-PDF-mode)
-		  ;; add Mac OS X open(1) to our list of commands (which will launch Preview.app)
-		  (add-to-list 'TeX-command-list '("Preview" "open %s.pdf" TeX-run-silent nil nil))
-		  ;; default to use acroread for viewing
-		  (setq-default TeX-command-Show "Preview")
-		  ;; shortcut for our tempo template
-		  (define-key LaTeX-mode-map [(control c) (control t)] 'tempo-template-latex)))
-      ))
-
-(setq c-default-style "linux")
+;; Automatically mark buffers with clients as done on C-x k
+(global-set-key (kbd "C-x k")
+                '(lambda ()
+                   (interactive)
+                   (if server-buffer-clients
+                       (server-done)
+                     (kill-this-buffer))))
 
 (defalias 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
-	  (lambda ()
-	    (setq cperl-indent-level 4
-		  cperl-close-paren-offset -4
-		  cperl-continued-statement-offset 4
-		  cperl-indent-parens-as-block t
-		  cperl-tab-always-indent t
-		  cperl-invalid-face nil)))
+          (lambda ()
+            (setq cperl-indent-level 4
+                  cperl-close-paren-offset -4
+                  cperl-continued-statement-offset 4
+                  cperl-indent-parens-as-block t
+                  cperl-tab-always-indent t
+                  cperl-invalid-face nil)))
 (custom-set-faces '(cperl-array-face ((t (:foreground "green" :weight bold))))
-		  '(cperl-hash-face ((t (:foreground "red" :weight bold)))))
+                  '(cperl-hash-face ((t (:foreground "red" :weight bold)))))
+(setq cperl-invalid-face nil)
+
+;; Linux kernel C-mode hook
+(defun c-lineup-arglist-tabs-only (ignored)
+  "Line up argument lists by tabs, not spaces"
+  (let* ((anchor (c-langelem-pos c-syntactic-element))
+         (column (c-langelem-2nd-pos c-syntactic-element))
+         (offset (- (1+ column) anchor))
+         (steps (floor offset c-basic-offset)))
+    (* (max steps 1)
+       c-basic-offset)))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            ;; Add kernel style
+            (c-add-style
+             "linux-tabs-only"
+             '("linux" (c-offsets-alist
+                        (arglist-cont-nonempty
+                         c-lineup-gcc-asm-reg
+                         c-lineup-arglist-tabs-only))))))
+(defun linux-c-mode-hook ()
+  (setq indent-tabs-mode t)
+  (setq show-trailing-whitespace t)
+  (c-set-style "linux-tabs-only"))
+(add-hook 'c-mode-hook 'linux-c-mode-hook)
 
 (autoload 'ucf-mode "ucf-mode" "Xilinx UCF mode" t)
 (add-to-list 'auto-mode-alist '("\\.ucf\\'" . ucf-mode))
 
 (add-hook 'vhdl-mode-hook
-	  (lambda ()
-	    (setq vhdl-actual-port-name (quote (".*" . "\\&_i"))
-		  vhdl-clock-edge-condition (quote function)
-		  vhdl-clock-name "clk"
-		  vhdl-compiler-options "-93"
-		  vhdl-conditions-in-parenthesis t
-		  vhdl-electric-mode t
-		  vhdl-entity-file-name (quote (".*" . "\\&_entity"))
-		  vhdl-reset-active-high t
-		  vhdl-reset-name "reset"
-		  vhdl-self-insert-comments nil
-		  vhdl-standard (quote (93 nil))
-		  vhdl-upper-case-keywords t
-		  vhdl-file-header "-- Copyright (c) <year> <author>
+          (lambda ()
+            (setq vhdl-actual-port-name (quote (".*" . "\\&_i"))
+                  vhdl-clock-edge-condition (quote function)
+                  vhdl-clock-name "clk"
+                  vhdl-compiler-options "-93"
+                  vhdl-conditions-in-parenthesis t
+                  vhdl-electric-mode t
+                  vhdl-entity-file-name (quote (".*" . "\\&_entity"))
+                  vhdl-reset-active-high t
+                  vhdl-reset-name "reset"
+                  vhdl-self-insert-comments nil
+                  vhdl-standard (quote (93 nil))
+                  vhdl-upper-case-keywords t
+                  vhdl-file-header "-- Copyright (c) <year> <author>
 -- All rights reserved.
 --
 -- Redistribution and use in source and binary forms, with or without
@@ -188,46 +165,23 @@ use IEEE.std_logic_1164.all;
 
 <cursor>")))
 
-;(add-hook 'perl-mode-hook
-;	  (lambda ()
-;	    (setq indent-tabs-mode nil)
-;	    (setq tab-width 4)
-;	    (setq perl-indent-level 4)))
-
-(add-hook 'sgml-mode-hook
-	  (lambda ()
-            (make-local-variable 'indent-tabs-mode)
-	    (setq indent-tabs-mode 't)
-	    (setq tab-width 2)
-	    (setq sgml-basic-offset 2)))
-
-;; use plain text mode for .css files
-(add-to-list 'auto-mode-alist '("\\.css\\'" . text-mode))
-
 ;; use crontab-mode for crontab.* files
 (add-to-list 'auto-mode-alist '("crontab\\.*" . crontab-mode))
 
-;; use c++-mode for *.js files
-(add-to-list 'auto-mode-alist '("\\.js\\'" . c++-mode))
+;; use makefile-mode for *.mak files
+(add-to-list 'auto-mode-alist '("\\.mak" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.d" . makefile-mode))
+(add-to-list 'auto-mode-alist '("Kbuild" . makefile-mode))
 
-;; use mail-mode for mutt-* files
-(add-to-list 'auto-mode-alist '("mutt-*" . mail-mode))
+;; use xml-mode for *.xsd files
+(add-to-list 'auto-mode-alist '("\\.xsd" . xml-mode))
 
-;; use sieve-mode for *.sieve files
-(add-to-list 'auto-mode-alist '("\\.sieve\\'" . sieve-mode))
-
-;; use tcl-mode for *.xdc files
-(add-to-list 'auto-mode-alist '("\\.xdc\\'" . tcl-mode))
-
-;; use xml-mode for all XML files
+;; use xml-mode for anything with an xml header
 (setq magic-mode-alist
       (cons '("<\\?xml " . xml-mode)
 	    magic-mode-alist))
 
-;; use asm-mode for 8051 assembly files
-(add-to-list 'auto-mode-alist '("\\.a51\\'" . asm-mode))
-
-;; set up X11 specific stuff
+;; set up X specific stuff
 (if (string-equal window-system "x")
     (progn
       ;; Make dead keys work
@@ -250,12 +204,28 @@ use IEEE.std_logic_1164.all;
      (mouse-avoidance-mode 'cat-and-mouse)
 
      ;; mode-line
-     (set-face-foreground 'mode-line "Black")
-     (set-face-background 'mode-line "#eaeaea")
+     ;(set-face-foreground 'mode-line "Black")
+     ;(set-face-background 'mode-line "#eaeaea")
+
+     ;; tool-bar
+     ;(set-face-foreground 'tool-bar "Wheat")
+     ;(set-face-background 'tool-bar "DarkSlateGray")
+
+     ;; custom buttons
+     ;(require 'cus-edit)
+     ;(set-face-foreground 'custom-button-face "Wheat")
+     ;(set-face-background 'custom-button-face "DarkSlateGray")
+     ;(set-face-foreground 'custom-button-pressed-face "Wheat")
+     ;(set-face-background 'custom-button-pressed-face "DarkSlateGray")
 
      ;; scroll-bar
-     (set-face-foreground 'scroll-bar "#cdcdb2")
-     (set-face-background 'scroll-bar "#dedfce")
+     ;(set-face-foreground 'scroll-bar "#cdcdb2")
+     ;(set-face-background 'scroll-bar "#dedfce")
+
+     ;; menu
+     ;(set-face-foreground 'menu "Wheat")
+     ;(set-face-background 'menu "DarkSlateGray")
+     ;(set-face-font 'menu "fixed")
 
      ;; mouse and cursor
      (set-face-background 'mouse "Orchid")
