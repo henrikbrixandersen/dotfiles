@@ -127,20 +127,7 @@
 		  (define-key LaTeX-mode-map [(control c) (control t)] 'tempo-template-latex)))
       ))
 
-(add-hook 'c-mode-hook
-	  (lambda ()
-	      (c-set-style "bsd")
-	      (setq indent-tabs-mode nil)
-	      ;; Use C-c C-s at points of source code so see which
-	      ;; c-set-offset is in effect for this situation
-	      (c-set-offset 'defun-block-intro 4)
-	      (c-set-offset 'statement-block-intro 4)
-	      (c-set-offset 'statement-case-intro 4)
-	      (c-set-offset 'substatement-open 2)
-	      (c-set-offset 'substatement 4)
-	      (c-set-offset 'arglist-cont-nonempty 4)
-	      (c-set-offset 'inclass 4)
-	      (c-set-offset 'knr-argdecl-intro 4)))
+(setq c-default-style "linux")
 
 (defalias 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
