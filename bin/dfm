@@ -18,55 +18,55 @@ usage() {
 ## Create symlinks for dotfiles and dirs
 create_symlinks() {
     for entry in `ls -A $DOTFILES | grep -v \~`; do
-	if echo $IGNORED | tr ' ' '\n' | fgrep -wq $entry; then
-	    continue
-	fi
+        if echo $IGNORED | tr ' ' '\n' | fgrep -wq $entry; then
+            continue
+        fi
 
-	src="$DOTFILES/$entry"
-	tgt="$HOME/$entry"
+        src="$DOTFILES/$entry"
+        tgt="$HOME/$entry"
 
-	if [ -e $tgt ] || [ -L $tgt ]; then
-	    if [ "`readlink $tgt`" = "$src" ]; then
-		if [ -n "$VERBOSE" ]; then
-		    echo "$tgt already installed, skipping..."
-		fi
-	    else
-		echo "$tgt already exists, skipping..."
-	    fi
+        if [ -e $tgt ] || [ -L $tgt ]; then
+            if [ "`readlink $tgt`" = "$src" ]; then
+                if [ -n "$VERBOSE" ]; then
+                    echo "$tgt already installed, skipping..."
+                fi
+            else
+                echo "$tgt already exists, skipping..."
+            fi
 
-	    continue
-	fi
+            continue
+        fi
 
-	if [ -n "$DRYRUN" ]; then
-	    echo "ln -sv $src $tgt"
-	else
-	    ln -sv $src $tgt
-	fi
+        if [ -n "$DRYRUN" ]; then
+            echo "ln -sv $src $tgt"
+        else
+            ln -sv $src $tgt
+        fi
     done
 }
 
 ## Parse parameters
 for param in $*; do
     case $param in
-	--dry-run)
-	    DRYRUN=yes
-	    ;;
-	--install|-i)
-	    INSTALL=yes
-	    ;;
-	--verbose|-v)
-	    VERBOSE=yes
-	    ;;
-	*)
-	    usage
-	    ;;
+        --dry-run)
+            DRYRUN=yes
+            ;;
+        --install|-i)
+            INSTALL=yes
+            ;;
+        --verbose|-v)
+            VERBOSE=yes
+            ;;
+        *)
+            usage
+            ;;
     esac
 done
 
 ## Execute
 if [ -n "$INSTALL" ]; then
     if [ -n "$VERBOSE" ]; then
-	echo "==> Installing dotfiles from '$DOTFILES'"
+        echo "==> Installing dotfiles from '$DOTFILES'"
     fi
     create_symlinks
 else
