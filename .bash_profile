@@ -33,7 +33,11 @@ case $TERM in
 esac
 
 remove-ssh-hostkey() {
-    sed -i -e "/^$1,/d" -e "/^$1[[:space:]]/d" $HOME/.ssh/known_hosts
+    local _hostname
+
+    for _hostname in $*; do
+        sed -i -e "/^$_hostname,/d" -e "/^$1[[:space:]]/d" $HOME/.ssh/known_hosts
+    done
 }
 
 _remove-ssh-hostkey() {
