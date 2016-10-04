@@ -46,6 +46,12 @@ _remove-ssh-hostkey() {
 }
 complete -F _remove-ssh-hostkey remove-ssh-hostkey
 
+add-ssh-authorized-keys() {
+    ssh $1 'mkdir ~/.ssh; chmod 700 ~/.ssh'
+    scp $HOME/.ssh/authorized_keys $1:~/.ssh/
+}
+complete -F _known_hosts add-ssh-authorized-keys
+
 strip-dmesg() {
     if [ -z "$1" ]; then
 	echo "Usage: strip-dmesg FILE" >&2
