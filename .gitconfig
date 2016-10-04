@@ -13,3 +13,9 @@
 	autosetuprebase = always
 [alias]
 	sta = status
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+	fsckObjects = true
