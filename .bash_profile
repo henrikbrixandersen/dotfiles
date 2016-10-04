@@ -54,10 +54,10 @@ complete -F _known_hosts add-ssh-authorized-keys
 
 strip-dmesg() {
     if [ -z "$1" ]; then
-	echo "Usage: strip-dmesg FILE" >&2
+        echo "Usage: strip-dmesg FILE" >&2
     else
-	dos2unix $1
-	sed -i -e 's/^\[[ \t0-9\.]*\] //g' $1
+        dos2unix $1
+        sed -i -e 's/^\[[ \t0-9\.]*\] //g' $1
     fi
 }
 
