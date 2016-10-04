@@ -7,7 +7,7 @@ fi
 alias ll='ls -lA'
 alias rmbak='rm -vf *~ .*~'
 alias ec='emacsclient'
-
+alias cgrep="grep --color=always"
 
 # Shell options
 if shopt | grep -q direxpand; then
