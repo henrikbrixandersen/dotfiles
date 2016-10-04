@@ -3,3 +3,5 @@
 .subversion/servers
 *~
 .*~
+.DS_Store
+/bin/fxload
