@@ -13,9 +13,17 @@
 	autosetuprebase = always
 [alias]
 	sta = status
+	lr = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`
+	rl = !git log --left-right --cherry-mark --oneline `git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`..HEAD
+[merge]
+	tool = kdiff3
+[pager]
+	status = false
 [transfer]
 	fsckobjects = true
 [fetch]
 	fsckobjects = true
 [receive]
 	fsckObjects = true
+[pager]
+	stash = false
