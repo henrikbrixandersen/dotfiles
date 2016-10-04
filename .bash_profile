@@ -1,6 +1,6 @@
 # ~/.bashrc
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi
 
 # Aliases
@@ -11,7 +11,7 @@ alias ec='emacsclient'
 
 # Shell options
 if shopt | grep -q direxpand; then
-    shopt -s direxpand
+	shopt -s direxpand
 fi
 
 # Colors
