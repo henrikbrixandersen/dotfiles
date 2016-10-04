@@ -4,3 +4,6 @@ set editing-mode emacs
 set completion-ignore-case on
 set completion-map-case on
 #set show-all-if-ambiguous on
+
+#"\e[1;5D": backward-word
+#"\e[1;5C": forward-word
