@@ -134,7 +134,9 @@
                   vhdl-reset-name "reset"
                   vhdl-self-insert-comments nil
                   vhdl-standard (quote (93 nil))
+                  vhdl-stutter-mode t
                   vhdl-upper-case-keywords t
+                  vhdl-use-direct-instantiation t
                   vhdl-file-header "-- Copyright (c) <year> <author>
 -- All rights reserved.
 --
