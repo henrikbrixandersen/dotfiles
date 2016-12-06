@@ -1,15 +1,11 @@
 # GTKWave configuration file
 
 alt_wheel_mode on
-context_tabposition 0
-do_initial_zoom_fit 1
+context_tabposition off
+do_initial_zoom_fit on
 highlight_wavewindow on
-
-color_back 000000
-
-color_0 00ff00
-color_1 00ff00
-color_trans 00ff00
+enable_horiz_grid off
+fill_waveform on
 
 color_u ffa500
 color_ufill 4d3200
@@ -21,6 +17,3 @@ color_umark ffff00
 color_mark 0080ff
 
 color_brkred 8080ff
-color_black 000000
-color_white ffffff
-
