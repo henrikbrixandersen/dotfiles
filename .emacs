@@ -123,20 +123,18 @@
 
 (add-hook 'vhdl-mode-hook
           (lambda ()
-            (setq vhdl-actual-port-name (quote (".*" . "\\&_i"))
-                  vhdl-clock-edge-condition (quote function)
+            (setq vhdl-clock-edge-condition (quote function)
                   vhdl-clock-name "clk"
-                  vhdl-compiler-options "-93"
                   vhdl-conditions-in-parenthesis t
                   vhdl-electric-mode t
-                  vhdl-entity-file-name (quote (".*" . "\\&_entity"))
                   vhdl-reset-active-high t
+                  vhdl-reset-kind (quote sync)
                   vhdl-reset-name "reset"
                   vhdl-self-insert-comments nil
                   vhdl-standard (quote (93 nil))
                   vhdl-stutter-mode t
                   vhdl-upper-case-keywords t
-                  vhdl-use-direct-instantiation t
+                  vhdl-use-direct-instantiation (quote always)
                   vhdl-file-header "-- Copyright (c) <year> <author>
 -- All rights reserved.
 --
