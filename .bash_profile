@@ -98,4 +98,7 @@ xilinx_vivado() {
     _unset_xilinx_env
     source /opt/Xilinx/Vivado/$version/settings64.sh
 }
-xilinx_vivado
+
+if [ -d /opt/Xilinx/Vivado ]; then
+    xilinx_vivado
+fi
