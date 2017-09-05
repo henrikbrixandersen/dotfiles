@@ -99,7 +99,7 @@ xilinx_ise() {
 }
 
 xilinx_vivado() {
-    local version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | head -n 1\``
+    local version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | tail -n 1\``
 
 #    echo "Setting up environment for Xilinx Vivado $version"
     _unset_xilinx_env
