@@ -3,6 +3,13 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
+# Local profile.d
+if [ -d $HOME/.local/etc/profile.d ]; then
+    for f in $HOME/.local/etc/profile.d/*; do
+        source $f
+    done
+fi
+
 # Aliases
 alias ll='ls -lA'
 alias rmbak='rm -vf *~ .*~'
