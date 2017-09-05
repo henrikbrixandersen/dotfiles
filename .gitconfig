@@ -9,8 +9,6 @@
 	date = local
 [rebase]
 	stat = true
-[branch]
-	autosetuprebase = always
 [alias]
 	sta = status
 	lr = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`
