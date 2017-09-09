@@ -3,9 +3,12 @@
 alt_wheel_mode on
 context_tabposition off
 do_initial_zoom_fit on
+hier_max_level 2
 highlight_wavewindow on
 enable_horiz_grid off
 fill_waveform on
+cursor_snap 10
+sst_expanded on
 
 color_u ffa500
 color_ufill 4d3200
