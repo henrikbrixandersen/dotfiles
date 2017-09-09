@@ -185,6 +185,28 @@ USE ieee.std_logic_1164.ALL;
 ;; use xml-mode for *.xsd files
 (add-to-list 'auto-mode-alist '("\\.xsd" . xml-mode))
 
+;; custom snmpv2-mode font lock keywords
+
+;; use snmpv2-mode for *-MIB.txt files
+(add-to-list 'auto-mode-alist '("-MIB\\.txt" . snmpv2-mode))
+(font-lock-add-keywords 'snmpv2-mode
+                        '(
+                          ("CONTACT-INFO" . font-lock-keyword-face)
+                          ("GROUP" . font-lock-keyword-face)
+                          ("MANDATORY-GROUPS)" . font-lock-keyword-face)
+                          ("LAST-UPDATED" . font-lock-keyword-face)
+                          ("M\\(AX-ACCESS\\|ODULE-COMPLIANCE\\)" . font-lock-keyword-face)
+                          ("MODULE-IDENTITY" . font-lock-keyword-face)
+                          ("MODULE" . font-lock-keyword-face)
+                          ("O\\(BJECTS\\|RGANIZATION\\)" . font-lock-keyword-face)
+                          ("OBJECT-GROUP" . font-lock-keyword-face)
+                          ("REVISION" . font-lock-keyword-face)
+                          )
+                        )
+(add-hook 'snmpv2-mode-hook
+          (lambda ()
+            (setq snmp-font-lock-keywords snmp-font-lock-keywords-3)))
+
 ;; use xml-mode for anything with an xml header
 (setq magic-mode-alist
       (cons '("<\\?xml " . xml-mode)
