@@ -126,6 +126,10 @@
 
 (add-hook 'vhdl-mode-hook
           (lambda ()
+            (if (and (stringp buffer-file-name)
+                     (string-match "tb_.*\\.vhd\\'" buffer-file-name))
+                (setq vhdl-standard (quote (8 nil)))
+                (setq vhdl-standard (quote (93 nil))))
             (setq vhdl-clock-edge-condition (quote function)
                   vhdl-clock-name "clk"
                   vhdl-conditions-in-parenthesis t
@@ -134,7 +138,7 @@
                   vhdl-reset-kind (quote sync)
                   vhdl-reset-name "reset"
                   vhdl-self-insert-comments nil
-                  vhdl-standard (quote (93 nil))
+                  vhdl-insert-empty-lines (quote none)
                   vhdl-stutter-mode t
                   vhdl-upper-case-keywords t
                   vhdl-use-direct-instantiation (quote always)
@@ -164,9 +168,11 @@
 --
 
 LIBRARY ieee;
-use IEEE.std_logic_1164.all;
+USE ieee.std_logic_1164.ALL;
 
 <cursor>")))
+
+
 
 ;; use crontab-mode for crontab.* files
 (add-to-list 'auto-mode-alist '("crontab\\.*" . crontab-mode))
