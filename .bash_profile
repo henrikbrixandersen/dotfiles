@@ -93,6 +93,8 @@ _unset_xilinx_env() {
 }
 
 xilinx_vivado() {
+    local args quiet version
+
     args=`getopt q $*`
     if [ $? -ne 0 ]; then
         echo "Usage: xilinx_vivado [-q] [VERSION]"
@@ -118,7 +120,7 @@ xilinx_vivado() {
 
     _unset_xilinx_env
     if [ -f /opt/Xilinx/Vivado/$version/settings64.sh ]; then
-        if [ "$quiet" -ne 1 ]; then
+        if [ "$quiet" != "1" ]; then
             echo "Setting up environment for Xilinx Vivado $version"
         fi
         source /opt/Xilinx/Vivado/$version/settings64.sh
