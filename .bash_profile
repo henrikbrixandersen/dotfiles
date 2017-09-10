@@ -103,7 +103,12 @@ xilinx_vivado() {
 
 #    echo "Setting up environment for Xilinx Vivado $version"
     _unset_xilinx_env
-    source /opt/Xilinx/Vivado/$version/settings64.sh
+    if [ -f /opt/Xilinx/Vivado/$version/settings64.sh ]; then
+        source /opt/Xilinx/Vivado/$version/settings64.sh
+    else
+        echo "Xilinx Vivado $version not found"
+        return 1
+    fi
 }
 
 _xilinx_vivado() {
