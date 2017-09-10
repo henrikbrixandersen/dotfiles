@@ -92,12 +92,6 @@ _unset_xilinx_env() {
     export LD_LIBRARY_PATH=`echo $_NEWPATH | sed -e 's/^://'`
 }
 
-xilinx_ise() {
-#    echo "Setting up environment for Xilinx 14.7"
-    _unset_xilinx_env
-    source /opt/Xilinx/14.7/ISE_DS/settings64.sh
-}
-
 xilinx_vivado() {
     local version
 
