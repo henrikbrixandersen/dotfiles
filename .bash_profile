@@ -99,12 +99,24 @@ xilinx_ise() {
 }
 
 xilinx_vivado() {
-    local version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | tail -n 1\``
+    local version
+
+    if [ -n "$1" ]; then
+        version="$1"
+    else
+        version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | tail -n 1\``
+    fi
 
 #    echo "Setting up environment for Xilinx Vivado $version"
     _unset_xilinx_env
     source /opt/Xilinx/Vivado/$version/settings64.sh
 }
+
+_xilinx_vivado() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "`cd /opt/Xilinx/Vivado && ls -d *`" -- $cur))
+}
+complete -F _xilinx_vivado xilinx_vivado
 
 if [ -d /opt/Xilinx/Vivado ]; then
     xilinx_vivado
