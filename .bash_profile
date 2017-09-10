@@ -93,7 +93,22 @@ _unset_xilinx_env() {
 }
 
 xilinx_vivado() {
-    local version
+    args=`getopt q $*`
+    if [ $? -ne 0 ]; then
+        echo "Usage: xilinx_vivado [-q] [VERSION]"
+        return 1;
+    fi
+
+    set -- $args
+    for i; do
+        case "$i" in
+            -q)
+                quiet=1
+                shift;;
+            --)
+                shift; break;;
+        esac
+    done
 
     if [ -n "$1" ]; then
         version="$1"
@@ -101,9 +116,11 @@ xilinx_vivado() {
         version=`basename \`ls -d /opt/Xilinx/Vivado/* | sort | tail -n 1\``
     fi
 
-#    echo "Setting up environment for Xilinx Vivado $version"
     _unset_xilinx_env
     if [ -f /opt/Xilinx/Vivado/$version/settings64.sh ]; then
+        if [ "$quiet" -ne 1 ]; then
+            echo "Setting up environment for Xilinx Vivado $version"
+        fi
         source /opt/Xilinx/Vivado/$version/settings64.sh
     else
         echo "Xilinx Vivado $version not found"
@@ -118,5 +135,5 @@ _xilinx_vivado() {
 complete -F _xilinx_vivado xilinx_vivado
 
 if [ -d /opt/Xilinx/Vivado ]; then
-    xilinx_vivado
+    xilinx_vivado -q
 fi
