@@ -43,7 +43,8 @@ remove-ssh-hostkey() {
     local _hostname
 
     for _hostname in $*; do
-        sed -i -e "/^$_hostname,/d" -e "/^$1[[:space:]]/d" $HOME/.ssh/known_hosts
+        sed -i -e "/^$_hostname,/d" $HOME/.ssh/known_hosts
+        sed -i -e "/^$1[[:space:]]/d" $HOME/.ssh/known_hosts
     done
 }
 
