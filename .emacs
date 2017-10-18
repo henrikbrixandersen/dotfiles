@@ -69,6 +69,9 @@
 ;; stop at the end of the file, don't just add lines
 (setq next-line-add-newlines nil)
 
+;; automatically follow symlinks to version-controlled files
+(setq vc-follow-symlinks t)
+
 ;; key binding for going to a specific line
 (global-set-key [(meta g)] 'goto-line)
 
