@@ -10,8 +10,29 @@ if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
 fi
 
-if [ -d $HOME/.local/bin ]; then
-    export PATH=$HOME/.local/bin:$PATH
+# $HOME/.local
+if [ -d $HOME/.local ]; then
+    # PATH
+    if [ -d $HOME/.local/bin ]; then
+        export PATH=$HOME/.local/bin:$PATH
+    fi
+    if [ -d $HOME/.local/sbin ]; then
+        export PATH=$HOME/.local/sbin:$PATH
+    fi
+    # LD_LIBRARY_PATH
+    if [ -d $HOME/.local/lib ]; then
+        export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+    fi
+    if [ -d $HOME/.local/lib64 ]; then
+        export LD_LIBRARY_PATH=$HOME/.local/lib64:$LD_LIBRARY_PATH
+    fi
+    # PKG_CONFIG_PATH
+    if [ -d $HOME/.local/lib/pkgconfig ]; then
+        export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
+    fi
+    if [ -d $HOME/.local/lib64/pkgconfig ]; then
+        export PKG_CONFIG_PATH=$HOME/.local/lib64/pkgconfig:$PKG_CONFIG_PATH
+    fi
 fi
 
 # Perl
