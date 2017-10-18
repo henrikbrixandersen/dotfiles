@@ -99,7 +99,7 @@ xilinx_vivado() {
     args=`getopt q $*`
     if [ $? -ne 0 ]; then
         echo "Usage: xilinx_vivado [-q] [VERSION]"
-        return 1;
+        return 1
     fi
 
     set -- $args
