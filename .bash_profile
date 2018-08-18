@@ -18,7 +18,7 @@ alias cgrep="grep --color=always"
 
 # Shell options
 if shopt | grep -q direxpand; then
-	shopt -s direxpand
+    shopt -s direxpand
 fi
 
 # Colors
