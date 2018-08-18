@@ -22,9 +22,18 @@ if shopt | grep -q direxpand; then
 fi
 
 # Colors
-export CLICOLOR=1
-export LS_COLORS='di=34;1:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-#export LS_COLORS='di=34;1:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46'
+case `uname -s` in
+    Linux)
+        export CLICOLOR=1
+        export LS_COLORS='di=34;1:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
+        #export LS_COLORS='di=34;1:ln=35:so=32:pi=33:ex=32:bd=34;46:cd=34;43:su=30;41:sg=30;46'
+        alias ls='ls --color=auto'
+        ;;
+
+    Darwin)
+        alias ls='ls -G'
+        ;;
+esac
 
 ## Terminal specific settings
 case $TERM in
