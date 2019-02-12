@@ -146,6 +146,6 @@ _xilinx_vivado() {
 }
 complete -F _xilinx_vivado xilinx_vivado
 
-if [ -d /opt/Xilinx/Vivado ]; then
-    xilinx_vivado -q
-fi
+#if [ -d /opt/Xilinx/Vivado ]; then
+#    xilinx_vivado -q
+#fi
