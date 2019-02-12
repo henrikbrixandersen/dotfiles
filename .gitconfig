@@ -13,7 +13,11 @@
 	sta = status
 	lr = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`
 	rl = !git log --left-right --cherry-mark --oneline `git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`..HEAD
+	lru = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`
+	rlu = !git log --left-right --cherry-mark --oneline `git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`..HEAD
 	lm = !git log --oneline --left-right $1^1..$1^2
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate --numstat
 [merge]
 	tool = kdiff3
 [pager]
