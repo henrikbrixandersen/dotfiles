@@ -78,6 +78,20 @@ strip-dmesg() {
     fi
 }
 
+zephyr() {
+    local _zephyr_dir
+
+    if [ -n "$1" ]; then
+       _zephyr_dir="$1"
+    else
+       _zephyr_dir="$HOME/Projects/zephyrproject/zephyr"
+    fi
+
+    if [ -f "$_zephyr_dir/zephyr-env.sh" ]; then
+        source "$_zephyr_dir/zephyr-env.sh"
+    fi
+}
+
 _unset_xilinx_env() {
     local _var
     local _path
