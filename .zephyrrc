@@ -1,0 +1,13 @@
+if [ "$(basename $SHELL)" = "bash" ]; then
+   source <(west completion bash)
+fi
+
+export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+export ZEPHYR_SDK_INSTALL_DIR=/opt/zephyr-sdk
+
+#export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+#export CROSS_COMPILE=/opt/rv32m1/riscv32-unknown-elf-gcc/bin/riscv32-unknown-elf-
+
+if [ -n "$ZEPHYR_BASE" ]; then
+   pushd "$ZEPHYR_BASE"
+fi
