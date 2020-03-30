@@ -163,3 +163,8 @@ complete -F _xilinx_vivado xilinx_vivado
 #if [ -d /opt/Xilinx/Vivado ]; then
 #    xilinx_vivado -q
 #fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
