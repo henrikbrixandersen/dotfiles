@@ -18,8 +18,14 @@
 	lm = !git log --oneline --left-right $1^1..$1^2
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate --numstat
+        hookoff = !mv .git/hooks/pre-commit .git/hooks/pre-commit.disabled
+        hookon = !mv .git/hooks/pre-commit.disabled .git/hooks/pre-commit
+        rank = !git shortlog --summary | sort -rn | nl
+        nukebranch = !git branch -D $1 ; git push origin :$1 ; git push vestas :$1
 [merge]
 	tool = kdiff3
+[diff]
+	renameLimit = 10000
 [pager]
 	status = false
 [transfer]
@@ -30,3 +36,4 @@
 	fsckObjects = true
 [pager]
 	stash = false
+        branch = false
