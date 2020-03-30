@@ -1,0 +1,2 @@
+[Master]
+init-hook='import sys; from os.path import expanduser; sys.path.append("{}/.local/lib/python3.6/site-packages/".format(expanduser("~")))'
