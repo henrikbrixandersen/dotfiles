@@ -4,6 +4,9 @@
 ;; scad
 (require 'scad nil t)
 
+;; etags
+(require 'etags nil t)
+
 ;; Graphviz dot mode
 (require 'graphviz-dot-mode nil t)
 (add-to-list 'auto-mode-alist '("\\.uml\\'" . graphviz-dot-mode))
