@@ -92,6 +92,32 @@ zephyr() {
     fi
 }
 
+zame() {
+    local _zame_dir
+
+    if [ -n "$1" ]; then
+       _zame_dir="$1"
+    else
+       _zame_dir="$HOME/Projects/zame"
+    fi
+
+    if [ -f "$_zame_dir/zephyr/zephyr-env.sh" ]; then
+        source "$_zame_dir/zephyr/zephyr-env.sh"
+        pushd "$_zame_dir/application"
+    fi
+}
+
+canconfig() {
+    local _bitrate=125000
+
+    if [ -n "$1" ]; then
+        _bitrate=$1
+    fi
+
+    sudo ip link set can0 type can bitrate $_bitrate
+    sudo ip link set up can0
+}
+
 _unset_xilinx_env() {
     local _var
     local _path
