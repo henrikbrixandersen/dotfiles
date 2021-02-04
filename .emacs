@@ -1,5 +1,15 @@
 ;; set the load path
+
+(package-initialize)
+
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp/") load-path))
+
+;; devicetree
+(require 'dts-mode)
+(add-to-list 'auto-mode-alist '("\\.overlay\\'" . dts-mode))
+
+;; cmake
+(require 'cmake-mode)
 
 ;; scad
 (require 'scad nil t)
