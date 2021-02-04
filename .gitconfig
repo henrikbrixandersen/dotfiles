@@ -37,3 +37,5 @@
 [pager]
 	stash = false
         branch = false
+[stash]
+	showPatch = true
