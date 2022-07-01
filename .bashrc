@@ -5,6 +5,7 @@ export ALTERNATE_EDITOR=emacs
 export PAGER=less
 export LESS='-c -i -m -R'
 export BLOCKSIZE=K
+export QUOTING_STYLE=literal
 
 if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
