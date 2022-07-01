@@ -13,15 +13,17 @@
 	sta = status
 	lr = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`
 	rl = !git log --left-right --cherry-mark --oneline `git rev-parse --abbrev-ref --symbolic-full-name @{upstream}`..HEAD
-	lru = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`
+	#lru = !git log --left-right --cherry-mark --oneline HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`
+	lru = !tig HEAD..`git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`
 	rlu = !git log --left-right --cherry-mark --oneline `git rev-parse --abbrev-ref --symbolic-full-name @{upstream} | sed -e 's/origin/upstream/'`..HEAD
 	lm = !git log --oneline --left-right $1^1..$1^2
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%an]%C(blue)[%cn]" --decorate --numstat
-        hookoff = !mv .git/hooks/pre-commit .git/hooks/pre-commit.disabled
-        hookon = !mv .git/hooks/pre-commit.disabled .git/hooks/pre-commit
-        rank = "! f() { git shortlog --summary $1 | sort -rn | nl; }; f"
-        nukebranch = "! f() { git branch -D $1 ; git push origin :$1 ; git push vestas :$1; }; f"
+	hookoff = !mv .git/hooks/pre-commit .git/hooks/pre-commit.disabled
+	hookon = !mv .git/hooks/pre-commit.disabled .git/hooks/pre-commit
+	rank = "! f() { git shortlog --summary $1 | sort -rn | nl; }; f"
+	nukebranch = "! f() { git branch -D $1 ; git push origin :$1 ; git push vestas :$1; }; f"
+	etags = !git ls-files '*.cpp' '*.c' '*.h' | etags -
 [merge]
 	tool = kdiff3
 [diff]
@@ -36,6 +38,7 @@
 	fsckObjects = true
 [pager]
 	stash = false
-        branch = false
+	status = false
+	branch = false
 [stash]
 	showPatch = true
