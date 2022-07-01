@@ -4,12 +4,19 @@
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/lisp/") load-path))
 
+;; Editorconfig
+(require 'editorconfig)
+(editorconfig-mode 1)
+
 ;; devicetree
 (require 'dts-mode)
 (add-to-list 'auto-mode-alist '("\\.overlay\\'" . dts-mode))
 
-;; cmake
+;; CMake
 (require 'cmake-mode)
+
+;; Kconfig
+(require 'kconfig-mode)
 
 ;; scad
 (require 'scad nil t)
