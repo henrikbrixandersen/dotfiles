@@ -87,9 +87,15 @@ zephyr() {
        _zephyr_dir="$HOME/Projects/zephyrproject/zephyr"
     fi
 
-    if [ -f "$_zephyr_dir/zephyr-env.sh" ]; then
+    if [ -f "$_zephyr_dir/../venv/bin/activate" ]; then
+        source "$_zephyr_dir/../venv/bin/activate"
+    elif [ -f "$_zephyr_dir/zephyr-env.sh" ]; then
         source "$_zephyr_dir/zephyr-env.sh"
     fi
+
+    pushd $_zephyr_dir
+
+    eval "$(west completion bash)"
 }
 
 zame() {
