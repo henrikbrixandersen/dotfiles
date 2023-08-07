@@ -42,3 +42,6 @@
 	branch = false
 [stash]
 	showPatch = true
+[tig "bind"]
+	main = å scroll-line-up
+	main = ø scroll-line-down
