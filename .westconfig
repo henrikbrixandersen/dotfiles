@@ -1,0 +1,4 @@
+[build]
+generator = Unix Makefiles
+pristine = auto
+
