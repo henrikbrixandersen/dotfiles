@@ -6,6 +6,7 @@ export PAGER=less
 export LESS='-c -i -m -R'
 export BLOCKSIZE=K
 export QUOTING_STYLE=literal
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
