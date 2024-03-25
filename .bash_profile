@@ -4,6 +4,11 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # Local profile.d
+if [ -d /usr/local/etc/profile.d ]; then
+    for f in /usr/local/etc/profile.d/*; do
+        source $f
+    done
+fi
 if [ -d $HOME/.local/etc/profile.d ]; then
     for f in $HOME/.local/etc/profile.d/*; do
         source $f
