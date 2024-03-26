@@ -103,6 +103,28 @@ zephyr() {
     eval "$(west completion bash)"
 }
 
+ncs() {
+    local _nrf_dir
+
+    if [ -n "$1" ]; then
+       _nrf_dir="$1"
+    else
+       _nrf_dir="$HOME/Projects/ncs/nrf"
+    fi
+
+    if [ -d "$_nrf_dir/../venv" ]; then
+        source "$_nrf_dir/../venv/bin/activate"
+    fi
+
+    if [ -f "$_nrf_dir/../zephyr/zephyr-env.sh" ]; then
+        source "$_nrf_dir/../zephyr/zephyr-env.sh"
+    fi
+
+    pushd $_nrf_dir
+
+    export PATH=$_nrf_dir/../gn:$PATH
+}
+
 zame() {
     local _zame_dir
 
