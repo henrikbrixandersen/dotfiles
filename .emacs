@@ -11,6 +11,13 @@
 ;; devicetree
 (require 'dts-mode)
 (add-to-list 'auto-mode-alist '("\\.overlay\\'" . dts-mode))
+(add-to-list 'auto-mode-alist '("\\.dtsi\\'" . dts-mode))
+
+;; Kconfig
+(require 'kconfig-mode)
+
+;; editorconfig
+(editorconfig-mode 1)
 
 ;; CMake
 (require 'cmake-mode)
@@ -23,6 +30,11 @@
 
 ;; etags
 (require 'etags nil t)
+
+;; ini-mode
+(autoload 'ini-mode "ini-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.ini\\'" . ini-mode))
+(add-to-list 'auto-mode-alist '("\\.eds\\'" . ini-mode))
 
 ;; Graphviz dot mode
 (require 'graphviz-dot-mode nil t)
@@ -205,6 +217,9 @@ USE ieee.std_logic_1164.ALL;
 ;; use xml-mode for *.xsd files
 (add-to-list 'auto-mode-alist '("\\.xsd" . xml-mode))
 
+;; use asm-mode for *.lst files
+(add-to-list 'auto-mode-alist '("\\.lst" . asm-mode))
+
 ;; custom snmpv2-mode font lock keywords
 
 ;; use snmpv2-mode for *-MIB.txt files
@@ -246,6 +261,7 @@ USE ieee.std_logic_1164.ALL;
      (tool-bar-mode 0)
 
      ;; start editing server
+     (server-force-delete)
      (server-start)
 
      ;; load wheel mouse support
