@@ -1,4 +1,11 @@
 [default]
 interface = socketcan
+channel = zcan0
+fd = True
+
+[zcan0]
+# Uses defaults
+
+[can0]
 channel = can0
-bitrate = 125000
+fd = False
