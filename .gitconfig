@@ -44,5 +44,5 @@
 [stash]
 	showPatch = true
 [tig "bind"]
-	main = å scroll-line-up
-	main = ø scroll-line-down
+	main = å :script ~/.tig/up.tig
+	main = ø :script ~/.tig/down.tig
