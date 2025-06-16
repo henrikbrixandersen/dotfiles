@@ -101,6 +101,8 @@ zephyr() {
     pushd $_zephyr_dir
 
     eval "$(west completion bash)"
+
+    git branch --show-current
 }
 
 ncs() {
