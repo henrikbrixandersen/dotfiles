@@ -31,10 +31,9 @@
 ;; etags
 (require 'etags nil t)
 
-;; ini-mode
-(autoload 'ini-mode "ini-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.ini\\'" . ini-mode))
-(add-to-list 'auto-mode-alist '("\\.eds\\'" . ini-mode))
+;; conf-mode
+(add-to-list 'auto-mode-alist '("\\.ini\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.eds\\'" . conf-mode))
 
 ;; Graphviz dot mode
 (require 'graphviz-dot-mode nil t)
