@@ -102,6 +102,8 @@ zephyr() {
 
     eval "$(west completion bash)"
 
+    export CCACHE_IGNOREOPTIONS='-specs=* --specs=*'
+
     git branch --show-current
 }
 
