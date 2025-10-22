@@ -46,3 +46,4 @@
 [tig "bind"]
 	main = å :script ~/.tig/up.tig
 	main = ø :script ~/.tig/down.tig
+	main = R !git rebase %(commit)
