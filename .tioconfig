@@ -1,0 +1,5 @@
+[default]
+color=11
+
+[tigard]
+device=/dev/serial/by-id/usb-SecuringHardware.com_Tigard_V1.1_TG11014b-if00-port0
